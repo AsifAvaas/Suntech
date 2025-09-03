@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "F:\\ASP.NET\\SunTech\\SunTech.csproj": {}
+    "C:\\Users\\User.DESKTOP-ELM077\\Suntech\\SunTech.csproj": {}
   },
   "projects": {
-    "F:\\ASP.NET\\SunTech\\SunTech.csproj": {
+    "C:\\Users\\User.DESKTOP-ELM077\\Suntech\\SunTech.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\ASP.NET\\SunTech\\SunTech.csproj",
+        "projectUniqueName": "C:\\Users\\User.DESKTOP-ELM077\\Suntech\\SunTech.csproj",
         "projectName": "SunTech",
-        "projectPath": "F:\\ASP.NET\\SunTech\\SunTech.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "F:\\ASP.NET\\SunTech\\obj\\",
+        "projectPath": "C:\\Users\\User.DESKTOP-ELM077\\Suntech\\SunTech.csproj",
+        "packagesPath": "C:\\Users\\User.DESKTOP-ELM077\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User.DESKTOP-ELM077\\Suntech\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\User.DESKTOP-ELM077\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,9 +36,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -86,12 +79,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-              "version": "[9.0.301, 9.0.301]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -100,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
