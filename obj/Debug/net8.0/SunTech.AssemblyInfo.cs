@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SunTech")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a2bba3183a3562d7231633128b82dc03506a2fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a52c472b0e974c768b38e37268a02e2fafd060a")]
 [assembly: System.Reflection.AssemblyProductAttribute("SunTech")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SunTech")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
