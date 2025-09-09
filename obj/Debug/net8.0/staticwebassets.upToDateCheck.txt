@@ -1,5 +1,15 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\bluetooth_headphones.jpg
+wwwroot\images\external_hard_drive.jpg
+wwwroot\images\gaming_mouse.jpg
+wwwroot\images\laptop_cooling_pad.jpg
+wwwroot\images\portable_charger.jpg
+wwwroot\images\smartphone_stand.jpg
+wwwroot\images\usb_flash_drive.jpg
+wwwroot\images\webcam.jpg
+wwwroot\images\wireless_keyboard.jpg
+wwwroot\images\wireless_mouse.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
