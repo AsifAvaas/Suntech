@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SunTech.Models.DatabaseModel.Inflow>
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h2 class="text-primary mb-4">Product Inflows</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Date Received</th>
+                <th>Supplier ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inflow in Model)
+            {
+                <tr>
+                    <td>@inflow.Product?.Name</td>
+                    <td>@inflow.Quantity</td>
+                    <td>@inflow.DateReceived.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@inflow.SupplierId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

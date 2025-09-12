@@ -24,12 +24,10 @@ namespace SunTech.Controllers
         }
         public IActionResult Product()
         {
-            return View("product");
+            // Redirect to Products controller Index action
+            return RedirectToAction("Index", "Products");
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
+
     }
 }
