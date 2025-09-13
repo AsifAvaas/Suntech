@@ -1,0 +1,18 @@
+﻿@model SunTech.Models.DatabaseModel.Product
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="card p-4">
+        <h3>@Model.Name</h3>
+        <p><strong>Category:</strong> @Model.Category</p>
+        <p><strong>Supplier:</strong> @Model.Supplier</p>
+        <p><strong>Price:</strong> ৳@Model.Price</p>
+        <p><strong>Stock:</strong> @Model.Quantity</p>
+        <p><strong>Expiry:</strong> @Model.ExpiryDate.ToString("yyyy-MM-dd")</p>
+
+        <a asp-action="Index" class="btn btn-secondary mt-3">Back to list</a>
+    </div>
+</div>

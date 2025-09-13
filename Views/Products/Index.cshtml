@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SunTech.Models.DatabaseModel.Product>
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">Suntech Products</h2>
+
+    <!-- Search Section -->
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <input type="text" id="searchInput" class="form-control shadow-lg" placeholder="Search products...">
+        </div>
+    </div>
+
+    <!-- Product List Section -->
+    <div class="row g-4" id="productList">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 col-sm-6 product-card">
+                <div class="card shadow-lg border-light rounded-lg">
+                    <img src="/images/default_product.jpg" class="card-img-top rounded-top" alt="@product.Name">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">@product.Name</h5>
+                        <p class="card-text text-muted">@product.Category</p>
+                        <p class="card-text"><strong>Price:</strong> <span class="text-success">৳@product.Price</span></p>
+                        <p class="card-text">
+                            <strong>Stock Status:</strong>
+                            <span class="badge @(product.Quantity > 10 ? "bg-success" : (product.Quantity > 0 ? "bg-warning" : "bg-danger"))">
+                                @(product.Quantity > 0 ? "In Stock" : "Out of Stock")
+                            </span>
+                        </p>
+                        <a href="@Url.Action("Create", "Inflows", new { productId = product.ProductId })" class="btn btn-primary w-100">
+                            Add to Stock
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        let filter = this.value.toUpperCase();
+        let cards = document.getElementsByClassName('product-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByClassName("card-title")[0];
+            if (title) {
+                let txtValue = title.textContent || title.innerText;
+                cards[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+    });
+</script>
