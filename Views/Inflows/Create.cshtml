@@ -1,34 +1,39 @@
 ﻿@model SunTech.Models.DatabaseModel.Inflow
 
 @{
+    ViewData["Title"] = "Add Inflow";
     Layout = "_Layout";
 }
 
 <div class="container mt-5">
-    
+    <h2 class="text-center mb-4 text-primary">Add Stock to Product</h2>
 
+    <!-- Inflow Creation Form -->
     <form asp-action="Create" method="post">
-        <div class="mb-3">
-            <label for="ProductId" class="form-label">Product</label>
-            <select asp-for="ProductId" class="form-select" required>
-                <option value="">-- Select Product --</option>
-                @foreach (var product in ViewBag.Products)
+        <div class="form-group">
+            <label asp-for="ProductId" class="control-label"></label>
+            <select asp-for="ProductId" class="form-control">
+                <option value="">Select Product</option>
+                @foreach (var product in ViewBag.Products as List<SunTech.Models.DatabaseModel.Product>)
                 {
                     <option value="@product.ProductId">@product.Name</option>
                 }
             </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
-            <label for="Quantity" class="form-label">Quantity</label>
-            <input asp-for="Quantity" type="number" class="form-control" required />
+        <div class="form-group">
+            <label asp-for="Quantity" class="control-label"></label>
+            <input asp-for="Quantity" class="form-control" placeholder="Enter quantity to add" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
-            <label for="SupplierId" class="form-label">Supplier ID</label>
-            <input asp-for="SupplierId" type="number" class="form-control" required />
+        <div class="form-group">
+            <label asp-for="SupplierId" class="control-label"></label>
+            <input asp-for="SupplierId" class="form-control" placeholder="Enter supplier name" />
+            <span asp-validation-for="SupplierId" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Inflow</button>
+        <button type="submit" class="btn btn-primary w-100">Add to Stock</button>
     </form>
 </div>

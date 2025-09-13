@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SunTech.Models.DatabaseModel.Dispatch>
+
+@{
+    ViewData["Title"] = "Dispatch List";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">Product Dispatch Records</h2>
+
+    <!-- Dispatch List Table -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity Dispatched</th>
+                <th>Date Dispatched</th>
+                <th>Customer ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dispatch in Model)
+            {
+                <tr>
+                    <td>@dispatch.Product.Name</td>
+                    <td>@dispatch.Quantity</td>
+                    <td>@dispatch.DateDispatched.ToString("yyyy-MM-dd")</td>
+                    <td>@dispatch.CustomerId</td>
+                    <td>
+                        <!-- View or Edit Dispatch action if necessary -->
+                        <a href="@Url.Action("Details", "Dispatch", new { id = dispatch.DispatchId })" class="btn btn-info btn-sm">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

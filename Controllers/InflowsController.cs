@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SunTech.Data;
-using SunTech.Models; // <-- Correct namespace
+using SunTech.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using static SunTech.Models.DatabaseModel;
