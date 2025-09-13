@@ -4,46 +4,322 @@
     Layout = "_Layout";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4 text-primary">Suntech Products</h2>
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --glass-bg: rgba(255, 255, 255, 0.25);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+        --shadow-hover: 0 15px 35px rgba(31, 38, 135, 0.4);
+    }
 
-    <!-- Add Product Button -->
-    <div class="row mb-4">
-        <div class="col-md-6 offset-md-3">
-            <a href="@Url.Action("Create", "Products")" class="btn btn-primary w-100">Add Product</a>
+    .product-hero {
+        background: var(--primary-gradient);
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        pointer-events: none;
+    }
+
+    .search-glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 1rem 1.5rem;
+        box-shadow: var(--shadow-light);
+        transition: all 0.3s ease;
+    }
+
+    .search-glass:focus {
+        outline: none;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .product-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 0;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: var(--shadow-light);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--primary-gradient);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .product-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .product-image-wrapper {
+        position: relative;
+        height: 240px;
+        overflow: hidden;
+        border-radius: 20px 20px 0 0;
+        background: linear-gradient(45deg, #f0f2f5, #e1e5e9);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.1);
+    }
+
+    .product-overlay {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        display: flex;
+        gap: 8px;
+    }
+
+    .product-body {
+        padding: 1.5rem;
+    }
+
+    .product-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .product-category {
+        font-size: 0.875rem;
+        color: #718096;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 1.5rem;
+    }
+
+    .status-in-stock {
+        background: linear-gradient(135deg, #48bb78, #38a169);
+        color: white;
+    }
+
+    .status-low-stock {
+        background: linear-gradient(135deg, #ed8936, #dd6b20);
+        color: white;
+    }
+
+    .status-out-stock {
+        background: linear-gradient(135deg, #f56565, #e53e3e);
+        color: white;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .btn-modern {
+        flex: 1;
+        padding: 0.875rem 1.5rem;
+        border: none;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-primary-modern {
+        background: var(--primary-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary-modern:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-secondary-modern {
+        background: rgba(255, 255, 255, 0.1);
+        color: #4a5568;
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary-modern:hover {
+        background: var(--secondary-gradient);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+
+    .floating-add-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 64px;
+        height: 64px;
+        background: var(--primary-gradient);
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-light);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .floating-add-btn:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .floating-add-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    @@media (max-width: 768px) {
+        .product-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .product-hero {
+            padding: 2rem 0;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="product-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 text-white fw-bold mb-3">Suntech Inventory</h1>
+                <p class="lead text-white opacity-75">Streamlined warehouse management with real-time stock tracking</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-end">
+                    <div class="d-inline-flex align-items-center bg-white bg-opacity-25 rounded-pill px-4 py-2">
+                        <span class="text-white fw-semibold">@Model.Count() Products</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
+<div class="container mb-5">
     <!-- Search Section -->
-    <div class="row mb-4">
-        <div class="col-md-6 offset-md-3">
-            <input type="text" id="searchInput" class="form-control shadow-lg" placeholder="Search products...">
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <input type="text" id="searchInput" class="form-control search-glass border-0" 
+                   placeholder="🔍 Search products...">
         </div>
     </div>
 
-    <!-- Product List Section -->
-    <div class="row g-4" id="productList">
+    <!-- Products Grid -->
+    <div class="product-grid" id="productList">
         @foreach (var product in Model)
         {
-            <div class="col-md-4 col-sm-6 product-card">
-                <div class="card shadow-lg border-light rounded-lg">
-                    <img src="/images/default_product.jpg" class="card-img-top rounded-top" alt="@product.Name">
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-primary">@product.Name</h5>
-                        <p class="card-text text-muted">@product.Category</p>
-                        <p class="card-text"><strong>Price:</strong> <span class="text-success">৳@product.Price</span></p>
-                        <p class="card-text">
-                            <strong>Stock Status:</strong>
-                            <span class="badge @(product.Quantity > 10 ? "bg-success" : (product.Quantity > 0 ? "bg-warning" : "bg-danger"))">
-                                @(product.Quantity > 0 ? "In Stock" : "Out of Stock")
-                            </span>
-                        </p>
-                        <a href="@Url.Action("Create", "Inflows", new { productId = product.ProductId })" class="btn btn-primary w-100">
-                            Add to Stock
+            <div class="product-card" data-category="@product.Category.ToLower()">
+                <div class="product-image-wrapper">
+                    <img src="/images/default_product.jpg" alt="@product.Name" class="product-image">
+                    <div class="product-overlay">
+                        <span class="status-badge @(product.Quantity > 10 ? "status-in-stock" : (product.Quantity > 0 ? "status-low-stock" : "status-out-stock"))">
+                            @(product.Quantity > 10 ? "In Stock" : (product.Quantity > 0 ? "Low Stock" : "Out of Stock"))
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="product-body">
+                    <h3 class="product-title">@product.Name</h3>
+                    <div class="product-category">@product.Category</div>
+                    <div class="product-price">৳@product.Price.ToString("N0")</div>
+                    
+                    <div class="product-actions">
+                        <a href="@Url.Action("Create", "Inflows", new { productId = product.ProductId })" 
+                           class="btn-modern btn-primary-modern">
+                           Add Stock
                         </a>
-                        <!-- Remove from Stock button -->
-                        <a href="@Url.Action("Create", "Dispatch", new { productId = product.ProductId })" class="btn btn-danger w-100 mt-2">
-                            Remove from Stock
+                        <a href="@Url.Action("Create", "Dispatch", new { productId = product.ProductId })" 
+                           class="btn-modern btn-secondary-modern">
+                           Remove
                         </a>
                     </div>
                 </div>
@@ -52,17 +328,54 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('searchInput').addEventListener('keyup', function () {
-        let filter = this.value.toUpperCase();
-        let cards = document.getElementsByClassName('product-card');
+<!-- Floating Action Button -->
+<a href="@Url.Action("Create", "Products")" class="floating-add-btn" title="Add New Product">
+    <svg viewBox="0 0 24 24">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+    </svg>
+</a>
 
-        for (let i = 0; i < cards.length; i++) {
-            let title = cards[i].getElementsByClassName("card-title")[0];
-            if (title) {
-                let txtValue = title.textContent || title.innerText;
-                cards[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
-            }
-        }
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const productCards = document.querySelectorAll('[data-category]');
+        
+        // Enhanced search with debouncing
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const filter = this.value.trim().toLowerCase();
+                
+                productCards.forEach(card => {
+                    const title = card.querySelector('.product-title').textContent.toLowerCase();
+                    const category = card.dataset.category;
+                    const isVisible = title.includes(filter) || category.includes(filter);
+                    
+                    card.style.opacity = isVisible ? '1' : '0';
+                    card.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
+                    card.style.pointerEvents = isVisible ? 'auto' : 'none';
+                });
+            }, 300);
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        productCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
     });
 </script>
+}
