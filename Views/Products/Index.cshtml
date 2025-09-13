@@ -7,6 +7,13 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4 text-primary">Suntech Products</h2>
 
+    <!-- Add Product Button -->
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <a href="@Url.Action("Create", "Products")" class="btn btn-primary w-100">Add Product</a>
+        </div>
+    </div>
+
     <!-- Search Section -->
     <div class="row mb-4">
         <div class="col-md-6 offset-md-3">
@@ -33,6 +40,10 @@
                         </p>
                         <a href="@Url.Action("Create", "Inflows", new { productId = product.ProductId })" class="btn btn-primary w-100">
                             Add to Stock
+                        </a>
+                        <!-- Remove from Stock button -->
+                        <a href="@Url.Action("Create", "Dispatch", new { productId = product.ProductId })" class="btn btn-danger w-100 mt-2">
+                            Remove from Stock
                         </a>
                     </div>
                 </div>
