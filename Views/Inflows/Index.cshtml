@@ -1,31 +1,81 @@
 ﻿@model IEnumerable<SunTech.Models.DatabaseModel.Inflow>
-
 @{
     Layout = "_Layout";
+    ViewData["Title"] = "Inflows";
 }
 
-<div class="container mt-5">
-    <h2 class="text-primary mb-4">Product Inflows</h2>
+<div class="container-fluid py-4 fade-in-up">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="text-dark fw-bold mb-0">
+                <i class="fas fa-arrow-down text-success me-3"></i>Stock Inflows
+            </h2>
+            <p class="text-muted">Track all incoming stock movements</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-success btn-lg shadow-sm">
+                <i class="fas fa-plus me-2"></i>Add Stock Inflow
+            </a>
+        </div>
+    </div>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-primary">
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Date Received</th>
-                <th>Supplier ID</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var inflow in Model)
-            {
-                <tr>
-                    <td>@inflow.Product?.Name</td>
-                    <td>@inflow.Quantity</td>
-                    <td>@inflow.DateReceived.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@inflow.SupplierId</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-gradient-success text-white">
+                        <tr>
+                            <th class="py-3 px-4">
+                                <i class="fas fa-box me-2"></i>Product
+                            </th>
+                            <th class="py-3">
+                                <i class="fas fa-plus-circle me-2"></i>Quantity Added
+                            </th>
+                            <th class="py-3">
+                                <i class="fas fa-calendar me-2"></i>Date Received
+                            </th>
+                            <th class="py-3">
+                                <i class="fas fa-truck me-2"></i>Supplier
+                            </th>
+                            <th class="py-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var inflow in Model)
+                        {
+                            <tr>
+                                <td class="py-4 px-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                             style="width: 40px; height: 40px;">
+                                            <i class="fas fa-box"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">@inflow.Product?.Name</div>
+                                            <small class="text-muted">ID: @inflow.ProductId</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4">
+                                    <span class="badge bg-success fs-6">+@inflow.Quantity</span>
+                                </td>
+                                <td class="py-4">
+                                    <div>@inflow.DateReceived.ToString("MMM dd, yyyy")</div>
+                                    <small class="text-muted">@inflow.DateReceived.ToString("hh:mm tt")</small>
+                                </td>
+                                <td class="py-4">
+                                    <span class="badge bg-secondary">@inflow.SupplierId</span>
+                                </td>
+                                <td class="py-4 text-center">
+                                    <button class="btn btn-outline-info btn-sm" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

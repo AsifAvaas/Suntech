@@ -1,51 +1,92 @@
 ﻿@model RegisterViewModel
-
 @{
     ViewData["Title"] = "Register";
     Layout = "_Layout";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-lg border-0" style="border-radius: 15px; overflow: hidden;">
-                <div class="card-header text-center py-4" style="background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); color: white;">
-                    <h3 class="mb-0">
-                        <i class="fas fa-user-plus me-2"></i>Create Account
-                    </h3>
-                    <p class="mb-0 mt-2">Join SunTech today</p>
+<div class="auth-container">
+    <div class="container-fluid min-vh-100">
+        <div class="row min-vh-100 g-0">
+            <!-- Left Side - Branding -->
+            <div class="col-lg-5 d-none d-lg-flex auth-brand-side">
+                <div class="d-flex align-items-center justify-content-center w-100 text-white position-relative">
+                    <div class="auth-brand-content text-center">
+                        <!-- Animated Background Elements -->
+                        <div class="floating-elements">
+                            <div class="floating-element"></div>
+                            <div class="floating-element"></div>
+                            <div class="floating-element"></div>
+                        </div>
+
+                        <div class="brand-logo mb-4">
+                            <i class="fas fa-sun fa-4x text-warning mb-3 pulse-animation"></i>
+                            <h1 class="fw-bold display-5 mb-3">
+                                <span class="text-warning">Sun</span><span class="text-white">Tech</span>
+                            </h1>
+                            <p class="lead opacity-75 mb-4">Join thousands of businesses optimizing their inventory</p>
+                        </div>
+
+                        <div class="feature-list">
+                            <div class="feature-item mb-2 slide-in-left">
+                                <i class="fas fa-users me-2 text-warning"></i>
+                                <span>10,000+ Active Users</span>
+                            </div>
+                            <div class="feature-item mb-2 slide-in-left" style="animation-delay: 0.2s;">
+                                <i class="fas fa-star me-2 text-warning"></i>
+                                <span>4.9/5 Customer Rating</span>
+                            </div>
+                            <div class="feature-item mb-2 slide-in-left" style="animation-delay: 0.4s;">
+                                <i class="fas fa-award me-2 text-warning"></i>
+                                <span>Industry Leading Platform</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="card-body p-4">
-                    <form asp-action="Register" method="post">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            <!-- Right Side - Register Form -->
+            <div class="col-lg-7 d-flex auth-form-side">
+                <div class="auth-form-container d-flex align-items-center justify-content-center w-100 p-4">
+                    <div class="w-100" style="max-width: 500px;">
+                        <!-- Mobile Logo -->
+                        <div class="d-lg-none text-center mb-4">
+                            <i class="fas fa-sun fa-3x text-warning mb-2"></i>
+                            <h2 class="fw-bold mb-0">
+                                <span class="text-primary">Sun</span><span class="text-dark">Tech</span>
+                            </h2>
+                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label asp-for="Name" class="form-label fw-semibold">
-                                    <i class="fas fa-user me-2 text-muted"></i>Full Name
+                        <!-- Welcome Header -->
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold text-dark mb-2">Create Your Account</h3>
+                            <p class="text-muted">Join SunTech and start managing your inventory efficiently</p>
+                        </div>
+
+                        <!-- Register Form -->
+                        <form asp-action="Register" method="post" class="auth-form">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3" role="alert"></div>
+
+                            <!-- Full Name -->
+                            <div class="form-floating mb-3">
+                                <input asp-for="Name" class="form-control form-control-auth" placeholder="Full Name" />
+                                <label asp-for="Name" class="form-label-auth">
+                                    <i class="fas fa-user me-2"></i>Full Name
                                 </label>
-                                <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter your full name" style="border-radius: 10px; border: 2px solid #e9ecef;" />
                                 <span asp-validation-for="Name" class="text-danger small"></span>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label asp-for="Email" class="form-label fw-semibold">
-                                    <i class="fas fa-envelope me-2 text-muted"></i>Email Address
+                            <!-- Email -->
+                            <div class="form-floating mb-3">
+                                <input asp-for="Email" type="email" class="form-control form-control-auth" placeholder="Email Address" />
+                                <label asp-for="Email" class="form-label-auth">
+                                    <i class="fas fa-envelope me-2"></i>Email Address
                                 </label>
-                                <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="Enter your email" style="border-radius: 10px; border: 2px solid #e9ecef;" />
                                 <span asp-validation-for="Email" class="text-danger small"></span>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label asp-for="Role" class="form-label fw-semibold">
-                                    <i class="fas fa-briefcase me-2 text-muted"></i>Role
-                                </label>
-                                <select asp-for="Role" class="form-select form-select-lg" style="border-radius: 10px; border: 2px solid #e9ecef;">
+                            <!-- Role Selection -->
+                            <div class="form-floating mb-3">
+                                <select asp-for="Role" class="form-select form-control-auth">
                                     <option value="">Select your role</option>
                                     <option value="Admin">Administrator</option>
                                     <option value="Manager">Manager</option>
@@ -53,63 +94,103 @@
                                     <option value="Operator">Operator</option>
                                     <option value="Analyst">Analyst</option>
                                 </select>
+                                <label asp-for="Role" class="form-label-auth">
+                                    <i class="fas fa-briefcase me-2"></i>Role
+                                </label>
                                 <span asp-validation-for="Role" class="text-danger small"></span>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="Password" class="form-label fw-semibold">
-                                    <i class="fas fa-lock me-2 text-muted"></i>Password
+                            <!-- Password Row -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input asp-for="Password" type="password" class="form-control form-control-auth" id="passwordInput" placeholder="Password" />
+                                        <label asp-for="Password" class="form-label-auth">
+                                            <i class="fas fa-lock me-2"></i>Password
+                                        </label>
+                                        <button type="button" class="btn-password-toggle" onclick="toggleRegisterPassword('passwordInput', 'passwordToggleIcon')">
+                                            <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                                        </button>
+                                        <span asp-validation-for="Password" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input asp-for="ConfirmPassword" type="password" class="form-control form-control-auth" id="confirmPasswordInput" placeholder="Confirm Password" />
+                                        <label asp-for="ConfirmPassword" class="form-label-auth">
+                                            <i class="fas fa-lock me-2"></i>Confirm Password
+                                        </label>
+                                        <button type="button" class="btn-password-toggle" onclick="toggleRegisterPassword('confirmPasswordInput', 'confirmPasswordToggleIcon')">
+                                            <i class="fas fa-eye" id="confirmPasswordToggleIcon"></i>
+                                        </button>
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Password Strength Indicator -->
+                            <div class="password-strength mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <small class="text-muted">Password Strength</small>
+                                    <small class="text-muted" id="strengthText">Weak</small>
+                                </div>
+                                <div class="progress" style="height: 4px;">
+                                    <div class="progress-bar bg-danger" id="strengthBar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Terms & Conditions -->
+                            <div class="form-check mb-4">
+                                <input class="form-check-input custom-checkbox" type="checkbox" id="agreeTerms" required />
+                                <label class="form-check-label text-muted" for="agreeTerms">
+                                    I agree to the <a href="#" class="auth-link">Terms of Service</a> and
+                                    <a href="#" class="auth-link">Privacy Policy</a>
                                 </label>
-                                <div class="input-group">
-                                    <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Create password" style="border-radius: 10px 0 0 10px; border: 2px solid #e9ecef;" />
-                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('Password')" style="border-radius: 0 10px 10px 0; border: 2px solid #e9ecef; border-left: none;">
-                                        <i class="fas fa-eye" id="toggleIconPassword"></i>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="btn btn-auth-primary btn-lg">
+                                    <i class="fas fa-user-plus me-2"></i>
+                                    Create Account
+                                </button>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="auth-divider mb-4">
+                                <span>or sign up with</span>
+                            </div>
+
+                            <!-- Social Registration -->
+                            <div class="row g-2 mb-4">
+                                <div class="col">
+                                    <button type="button" class="btn btn-social w-100">
+                                        <i class="fab fa-google"></i>
                                     </button>
                                 </div>
-                                <span asp-validation-for="Password" class="text-danger small"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="ConfirmPassword" class="form-label fw-semibold">
-                                    <i class="fas fa-lock me-2 text-muted"></i>Confirm Password
-                                </label>
-                                <div class="input-group">
-                                    <input asp-for="ConfirmPassword" type="password" class="form-control form-control-lg" placeholder="Confirm password" style="border-radius: 10px 0 0 10px; border: 2px solid #e9ecef;" />
-                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('ConfirmPassword')" style="border-radius: 0 10px 10px 0; border: 2px solid #e9ecef; border-left: none;">
-                                        <i class="fas fa-eye" id="toggleIconConfirmPassword"></i>
+                                <div class="col">
+                                    <button type="button" class="btn btn-social w-100">
+                                        <i class="fab fa-microsoft"></i>
                                     </button>
                                 </div>
-                                <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                                <div class="col">
+                                    <button type="button" class="btn btn-social w-100">
+                                        <i class="fab fa-github"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="agreeTerms" required style="border-radius: 4px;" />
-                                <label class="form-check-label" for="agreeTerms">
-                                    I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and
-                                    <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
-                                </label>
+                            <!-- Sign In Link -->
+                            <div class="text-center">
+                                <p class="text-muted mb-0">
+                                    Already have an account?
+                                    <a href="@Url.Action("Login", "Account")" class="auth-link text-decoration-none fw-semibold">
+                                        Sign in here
+                                    </a>
+                                </p>
                             </div>
-                        </div>
-
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-custom btn-lg">
-                                <i class="fas fa-user-plus me-2"></i>Create Account
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="card-footer text-center py-3" style="background-color: #f8f9fa;">
-                    <p class="mb-0">
-                        Already have an account?
-                        <a href="@Url.Action("Login", "Account")" class="text-decoration-none fw-semibold" style="color: var(--primary-color);">
-                            Sign in here
-                        </a>
-                    </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,11 +198,14 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
     <script>
-        function togglePassword(fieldName) {
-            const passwordInput = document.querySelector(`input[name="${fieldName}"]`);
-            const toggleIcon = document.getElementById(`toggleIcon${fieldName}`);
+        function toggleRegisterPassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(iconId);
 
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -134,23 +218,11 @@
             }
         }
 
-        // Add smooth focus effects
-        document.querySelectorAll('.form-control, .form-select').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.style.borderColor = 'var(--secondary-color)';
-                this.style.boxShadow = '0 0 0 0.2rem rgba(247, 147, 30, 0.25)';
-            });
-
-            input.addEventListener('blur', function() {
-                this.style.borderColor = '#e9ecef';
-                this.style.boxShadow = 'none';
-            });
-        });
-
         // Password strength indicator
-        document.querySelector('input[name="Password"]').addEventListener('input', function() {
+        document.getElementById('passwordInput').addEventListener('input', function() {
             const password = this.value;
-            const strengthBar = document.getElementById('passwordStrength');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
             let strength = 0;
 
             if (password.length >= 8) strength++;
@@ -159,12 +231,27 @@
             if (/[0-9]/.test(password)) strength++;
             if (/[^A-Za-z0-9]/.test(password)) strength++;
 
-            if (strengthBar) {
-                strengthBar.style.width = (strength * 20) + '%';
-                strengthBar.className = 'progress-bar ' +
-                    (strength < 2 ? 'bg-danger' :
-                     strength < 4 ? 'bg-warning' : 'bg-success');
+            const widthPercent = (strength * 20);
+            strengthBar.style.width = widthPercent + '%';
+
+            if (strength < 2) {
+                strengthBar.className = 'progress-bar bg-danger';
+                strengthText.textContent = 'Weak';
+                strengthText.className = 'text-danger';
+            } else if (strength < 4) {
+                strengthBar.className = 'progress-bar bg-warning';
+                strengthText.textContent = 'Medium';
+                strengthText.className = 'text-warning';
+            } else {
+                strengthBar.className = 'progress-bar bg-success';
+                strengthText.textContent = 'Strong';
+                strengthText.className = 'text-success';
             }
+        });
+
+        // Add form animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.auth-form-container').classList.add('fade-in-up');
         });
     </script>
 }

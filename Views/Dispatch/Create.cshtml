@@ -1,29 +1,77 @@
 ﻿@model SunTech.Models.DatabaseModel.Dispatch
-
 @{
     ViewData["Title"] = "Remove Product from Stock";
     Layout = "_Layout";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4 text-primary">Remove Product from Stock</h2>
+<div class="container py-5 fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-danger text-white text-center py-4">
+                    <h2 class="mb-0 fw-bold">
+                        <i class="fas fa-truck me-3"></i>Dispatch Product
+                    </h2>
+                    <p class="mb-0 opacity-75">Remove product from inventory</p>
+                </div>
 
-    <form asp-action="Create" method="post">
-        <!-- Hidden product ID input -->
-        <input type="hidden" asp-for="ProductId" value="@ViewBag.ProductId" />
+                <div class="card-body p-5">
+                    <!-- Product Info Alert -->
+                    <div class="alert alert-warning mb-4">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-box fa-2x me-3"></i>
+                            <div>
+                                <h5 class="mb-1">Product Information</h5>
+                                <p class="mb-0">Selected product for dispatch</p>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label asp-for="Quantity" class="control-label"></label>
-            <input asp-for="Quantity" class="form-control" placeholder="Enter quantity to remove" />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
+                    <form asp-action="Create" method="post" novalidate>
+                        <input type="hidden" asp-for="ProductId" value="@ViewBag.ProductId" />
+
+                        <div class="mb-4">
+                            <label asp-for="Quantity" class="form-label fw-semibold">
+                                <i class="fas fa-minus-circle me-2 text-danger"></i>Quantity to Remove
+                            </label>
+                            <input asp-for="Quantity" class="form-control form-control-lg"
+                                   placeholder="Enter quantity" type="number" min="1" />
+                            <span asp-validation-for="Quantity" class="text-danger small"></span>
+                            <div class="form-text">Enter the number of units to dispatch</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="CustomerId" class="form-label fw-semibold">
+                                <i class="fas fa-user me-2 text-danger"></i>Customer Information
+                            </label>
+                            <input asp-for="CustomerId" class="form-control form-control-lg"
+                                   placeholder="Enter customer ID or name (optional)" />
+                            <span asp-validation-for="CustomerId" class="text-danger small"></span>
+                            <div class="form-text">Leave blank for internal use or waste disposal</div>
+                        </div>
+
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Warning:</strong> This action will permanently reduce the product's stock quantity.
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-check me-2"></i>Dispatch Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label asp-for="CustomerId" class="control-label"></label>
-            <input asp-for="CustomerId" class="form-control" placeholder="Enter customer ID (optional)" />
-            <span asp-validation-for="CustomerId" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100">Remove from Stock</button>
-    </form>
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
