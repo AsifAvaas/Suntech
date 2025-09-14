@@ -1,0 +1,275 @@
+@model IEnumerable<SunTech.Models.DatabaseModel.Storage>
+@{
+    ViewData["Title"] = "Warehouse Storage Management";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid py-5 fade-in-up">
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <h1 class="display-4 fw-bold text-primary mb-2">
+                    <i class="fas fa-warehouse me-3"></i>Warehouse Storage Management
+                </h1>
+                <p class="lead text-muted">Real-time product distribution across multiple warehouse locations</p>
+            </div>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <!-- Warehouse Cards Grid -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+            @foreach (var locationGroup in Model.GroupBy(s => s.Location))
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-lg border-0 card-hover">
+                        <!-- Card Header -->
+                        @if (locationGroup.Key == "Warehouse-A")
+                        {
+                            <div class="card-header bg-primary text-white text-center py-3">
+                                <h4 class="card-title mb-1">
+                                    <i class="fas fa-building me-2"></i>Warehouse-A
+                                </h4>
+                                <small class="opacity-75">
+                                    <i class="fas fa-map-marker-alt me-1"></i>Dhaka, Dhanmondi
+                                </small>
+                            </div>
+                            <div class="map-container" style="height: 200px; overflow: hidden;">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.906448896288!2d90.37580421541296!3d23.750892984589246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755bf5c5c5c5c5c%3A0x5c5c5c5c5c5c5c5c!2sDhanmondi%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1695000000000" 
+                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                                </iframe>
+                            </div>
+                        }
+                        else if (locationGroup.Key == "Warehouse-B")
+                        {
+                            <div class="card-header bg-success text-white text-center py-3">
+                                <h4 class="card-title mb-1">
+                                    <i class="fas fa-warehouse me-2"></i>Warehouse-B
+                                </h4>
+                                <small class="opacity-75">
+                                    <i class="fas fa-map-marker-alt me-1"></i>Dhaka, Gulshan
+                                </small>
+                            </div>
+                            <div class="map-container" style="height: 200px; overflow: hidden;">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.143590045636!2d90.41460891541412!3d23.794773484586896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c77d5c5c5c5c%3A0x5c5c5c5c5c5c5c5c!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1695000000001" 
+                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                                </iframe>
+                            </div>
+                        }
+                        else if (locationGroup.Key == "Cold-Storage")
+                        {
+                            <div class="card-header bg-warning text-white text-center py-3">
+                                <h4 class="card-title mb-1">
+                                    <i class="fas fa-store me-2"></i>Warehouse-C
+                                </h4>
+                                <small class="opacity-75">
+                                    <i class="fas fa-map-marker-alt me-1"></i>Dhaka, Gulshan
+                                </small>
+                            </div>
+                            <div class="map-container" style="height: 200px; overflow: hidden;">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.143590045636!2d90.41460891541412!3d23.794773484586896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c77d5c5c5c5c%3A0x5c5c5c5c5c5c5c5c!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1695000000001"  
+                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                                </iframe>
+                            </div>
+                        }
+                        else if (locationGroup.Key == "Dry-Storage")
+                        {
+                            <div class="card-header bg-info text-white text-center py-3">
+                                <h4 class="card-title mb-1">
+                                    <i class="fas fa-boxes me-2"></i>Warehouse-D
+                                </h4>
+                                <small class="opacity-75">
+                                    <i class="fas fa-map-marker-alt me-1"></i>Dhaka, Mirpur
+                                </small>
+                            </div>
+                            <div class="map-container" style="height: 200px; overflow: hidden;">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4442846286!2d90.36519091541514!3d23.822409684583244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c14a14a14a14%3A0x14a14a14a14a14a1!2sMirpur%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1695000000003" 
+                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                                </iframe>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="card-header bg-secondary text-white text-center py-3">
+                                <h4 class="card-title mb-1">
+                                    <i class="fas fa-building me-2"></i>@locationGroup.Key
+                                </h4>
+                                <small class="opacity-75">
+                                    <i class="fas fa-map-marker-alt me-1"></i>Unknown Location
+                                </small>
+                            </div>
+                            <div class="map-container" style="height: 200px; overflow: hidden; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                                <span class="text-muted">Map not available</span>
+                            </div>
+                        }
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <!-- Statistics -->
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <h5 class="text-primary mb-0">@locationGroup.Count()</h5>
+                                        <small class="text-muted">Products</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <h5 class="text-success mb-0">@locationGroup.Sum(s => s.Quantity)</h5>
+                                        <small class="text-muted">Total Units</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product List -->
+                            <div class="product-list" style="max-height: 250px; overflow-y: auto;">
+                                @foreach (var storage in locationGroup.Take(5))
+                                {
+                                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 rounded bg-light">
+                                        <div>
+                                            <strong class="text-dark">@storage.Product?.Name</strong>
+                                            <br><small class="text-muted">ID: @storage.ProductId</small>
+                                        </div>
+                                        <span class="badge bg-primary">@storage.Quantity units</span>
+                                    </div>
+                                }
+                                
+                                @if (locationGroup.Count() > 5)
+                                {
+                                    <div class="text-center">
+                                        <small class="text-muted">
+                                            <i class="fas fa-ellipsis-h"></i> 
+                                            +@(locationGroup.Count() - 5) more products
+                                        </small>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="card-footer bg-transparent text-center">
+                            @if (locationGroup.Key == "Warehouse-A")
+                            {
+                                <button class="btn btn-outline-primary btn-sm" onclick="alert('Details for Warehouse-A')">
+                                    <i class="fas fa-eye me-1"></i>View Details
+                                </button>
+                            }
+                            else if (locationGroup.Key == "Warehouse-B")
+                            {
+                                <button class="btn btn-outline-success btn-sm" onclick="alert('Details for Warehouse-B')">
+                                    <i class="fas fa-eye me-1"></i>View Details
+                                </button>
+                            }
+                            else if (locationGroup.Key == "Cold-Storage")
+                            {
+                                <button class="btn btn-outline-warning btn-sm" onclick="alert('Details for Warehouse-C')">
+                                    <i class="fas fa-eye me-1"></i>View Details
+                                </button>
+                            }
+                            else if (locationGroup.Key == "Dry-Storage")
+                            {
+                                <button class="btn btn-outline-info btn-sm" onclick="alert('Details for Warehouse-D')">
+                                    <i class="fas fa-eye me-1"></i>View Details
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-secondary btn-sm" onclick="alert('Details for @locationGroup.Key')">
+                                    <i class="fas fa-eye me-1"></i>View Details
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Overall Statistics -->
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="card border-0 shadow">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted mb-3">Overall Storage Statistics</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="stat-box">
+                                    <h3 class="text-primary">@Model.GroupBy(s => s.Location).Count()</h3>
+                                    <p class="text-muted mb-0">Active Warehouses</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-box">
+                                    <h3 class="text-success">@Model.Select(s => s.ProductId).Distinct().Count()</h3>
+                                    <p class="text-muted mb-0">Unique Products</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-box">
+                                    <h3 class="text-warning">@Model.Sum(s => s.Quantity)</h3>
+                                    <p class="text-muted mb-0">Total Units Stored</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-box">
+                                    <h3 class="text-info">@Model.Count()</h3>
+                                    <p class="text-muted mb-0">Storage Records</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center text-muted py-5">
+            <i class="fas fa-box-open fa-5x mb-4 text-secondary"></i>
+            <h3>No Storage Data Available</h3>
+            <p>Products will be automatically assigned to warehouse locations when available.</p>
+        </div>
+    }
+
+    <!-- Back Button -->
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-lg">
+                <i class="fas fa-arrow-left me-2"></i>Back to Products
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.stat-item, .stat-box {
+    padding: 10px 0;
+}
+
+.product-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.product-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.product-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+</style>
