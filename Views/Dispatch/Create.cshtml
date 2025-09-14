@@ -16,19 +16,26 @@
                 </div>
 
                 <div class="card-body p-5">
-                    <!-- Product Info Alert -->
                     <div class="alert alert-warning mb-4">
                         <div class="d-flex align-items-center">
                             <i class="fas fa-box fa-2x me-3"></i>
                             <div>
                                 <h5 class="mb-1">Product Information</h5>
-                                <p class="mb-0">Selected product for dispatch</p>
+                                <p class="mb-0">Selected ProductId: @ViewBag.ProductId</p>
                             </div>
                         </div>
                     </div>
 
                     <form asp-action="Create" method="post" novalidate>
-                        <input type="hidden" asp-for="ProductId" value="@ViewBag.ProductId" />
+    @Html.AntiForgeryToken()
+    
+    <!-- ADD THIS LINE RIGHT HERE -->
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    
+    <input type="hidden" name="productId" value="@ViewBag.ProductId" />
+
+
+                        <input type="hidden" name="productId" value="@ViewBag.ProductId" />
 
                         <div class="mb-4">
                             <label asp-for="Quantity" class="form-label fw-semibold">
@@ -37,7 +44,6 @@
                             <input asp-for="Quantity" class="form-control form-control-lg"
                                    placeholder="Enter quantity" type="number" min="1" />
                             <span asp-validation-for="Quantity" class="text-danger small"></span>
-                            <div class="form-text">Enter the number of units to dispatch</div>
                         </div>
 
                         <div class="mb-4">
@@ -47,7 +53,39 @@
                             <input asp-for="CustomerId" class="form-control form-control-lg"
                                    placeholder="Enter customer ID or name (optional)" />
                             <span asp-validation-for="CustomerId" class="text-danger small"></span>
-                            <div class="form-text">Leave blank for internal use or waste disposal</div>
+                            <div class="form-text">Leave blank for waste disposal</div>
+                        </div>
+
+ <!-- Waste toggle - FIXED ORDER -->
+<div class="form-check form-switch mb-4">
+    <!-- checkbox comes FIRST -->
+    <input class="form-check-input" 
+           type="checkbox" 
+           id="isWaste" 
+           name="isWaste" 
+           value="true" />
+    
+    <!-- hidden comes SECOND to provide false when unchecked -->
+    <input type="hidden" name="isWaste" value="false" />
+
+    <label class="form-check-label fw-semibold" for="isWaste">
+        <i class="fas fa-trash-alt me-2 text-danger"></i>Mark as Waste
+    </label>
+</div>
+
+
+
+                        <!-- Waste reason (disabled by default ✅) -->
+                        <div class="mb-4" id="wasteReasonContainer">
+                            <label class="form-label fw-semibold" for="wasteReason">
+                                <i class="fas fa-comment-dots me-2 text-danger"></i>Waste Reason
+                            </label>
+                            <input class="form-control form-control-lg"
+                                   id="wasteReason"
+                                   name="wasteReason"
+                                   placeholder="Enter reason"
+                                   disabled /> <!-- ✅ starts disabled -->
+                            <span class="text-danger small">@Html.ValidationMessage("WasteReason")</span>
                         </div>
 
                         <div class="alert alert-danger">
@@ -71,7 +109,20 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @@await Html.RenderPartialAsync("_ValidationScriptsPartial")
+
+    <!-- ✅ Toggle Waste Reason input -->
+    <script>
+        document.getElementById("isWaste").addEventListener("change", function () {
+            const wasteReason = document.getElementById("wasteReason");
+            if (this.checked) {
+                wasteReason.disabled = false;
+                wasteReason.required = true; // ✅ force user to enter reason
+            } else {
+                wasteReason.disabled = true;
+                wasteReason.required = false;
+                wasteReason.value = ""; // clear value when unchecked
+            }
+        });
+    </script>
 }
