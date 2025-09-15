@@ -1,122 +1,16 @@
 ﻿@{
+    Layout = "_Layout";
     ViewData["Title"] = "Suntech Warehouse Management System";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
 <style>
-    :root {
-          --primary-color: #3064d3;
-            --secondary-color: #2e51c3;
-            --accent-color: #c8903c;
-        --success-color: #10b981;
-        --danger-color: #ef4444;
-        --dark-color: #1f2937;
-        --light-color: #f8fafc;
-        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        color: var(--dark-color);
-    }
-
-    /* Hero Section */
-    .hero-section {
-        background: var(--gradient-1);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        color: white;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="rgba(255,255,255,0.1)" fill-opacity="0.1"><circle cx="20" cy="20" r="2"/><circle cx="40" cy="40" r="2"/></g></svg>') repeat;
-        opacity: 0.3;
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 2;
-    }
-
-    .hero-title {
-        font-size: 4rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .hero-subtitle {
-        font-size: 1.25rem;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-    }
-
-    .btn-hero {
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        padding: 12px 24px;
-        border-radius: 30px;
-        font-weight: 600;
-        text-decoration: none;
-        margin: 5px;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-    }
-
-    .btn-hero:hover {
-        background: rgba(255, 255, 255, 0.3);
-        color: white;
-        transform: translateY(-2px);
-    }
-
-    /* Dashboard Cards */
-    .card-modern {
-        background: white;
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        border: none;
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-
-    .card-modern:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    /* Metric Cards */
+    /* Custom styles for home page */
     .metric-card {
         background: white;
         border-radius: 16px;
         padding: 2rem;
         text-align: center;
-        box-shadow: var(--shadow);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         position: relative;
         margin-bottom: 1.5rem;
@@ -129,20 +23,20 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: var(--gradient-1);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px 16px 0 0;
     }
 
     .metric-card:hover {
         transform: translateY(-5px);
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
     .metric-number {
         font-size: 2.5rem;
         font-weight: 800;
-        color: var(--primary-color);
+        color: #0d6efd;
         margin-bottom: 0.5rem;
-        font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
     }
 
     .metric-label {
@@ -153,44 +47,37 @@
         font-weight: 600;
     }
 
-    /* Feature Cards */
     .feature-card {
         background: white;
         border-radius: 12px;
         padding: 1.5rem;
         margin: 1rem 0;
-        box-shadow: var(--shadow);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
-        border-left: 4px solid var(--primary-color);
+        border-left: 4px solid #0d6efd;
+        height: 100%;
     }
 
     .feature-card:hover {
         transform: translateY(-3px);
-        box-shadow: var(--shadow-lg);
-        border-left-color: var(--accent-color);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        border-left-color: #ffc107;
     }
 
     .feature-icon {
         font-size: 2.5rem;
         margin-bottom: 1rem;
-        color: var(--primary-color);
     }
 
-    /* Chart Container - Fixed */
     .chart-container {
         position: relative;
         height: 300px;
         width: 100%;
     }
 
-    .chart-container canvas {
-        max-height: 300px;
-    }
-
-    /* Activity Feed */
     .activity-item {
         padding: 1rem;
-        border-left: 3px solid var(--primary-color);
+        border-left: 3px solid #0d6efd;
         margin: 0.5rem 0;
         background: #f8fafc;
         border-radius: 0 8px 8px 0;
@@ -204,12 +91,11 @@
 
     .activity-time {
         font-size: 0.75rem;
-        color: var(--accent-color);
+        color: #ffc107;
         font-weight: 600;
         text-transform: uppercase;
     }
 
-    /* Status Badge */
     .status-badge {
         display: inline-flex;
         align-items: center;
@@ -222,13 +108,13 @@
 
     .status-online {
         background: rgba(16, 185, 129, 0.1);
-        color: var(--success-color);
+        color: #10b981;
         border: 1px solid rgba(16, 185, 129, 0.2);
     }
 
     .status-warning {
         background: rgba(245, 158, 11, 0.1);
-        color: var(--accent-color);
+        color: #f59e0b;
         border: 1px solid rgba(245, 158, 11, 0.2);
     }
 
@@ -240,132 +126,147 @@
         animation: pulse 2s infinite;
     }
 
-    .status-online .status-dot { background: var(--success-color); }
-    .status-warning .status-dot { background: var(--accent-color); }
+    .status-online .status-dot { background: #10b981; }
+    .status-warning .status-dot { background: #f59e0b; }
 
     @@keyframes pulse {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
     }
 
-    /* Section Title */
-    .section-title {
-        color: var(--dark-color);
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        font-size: 1.5rem;
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     }
 
-    .section-title i {
-        margin-right: 0.75rem;
-        color: var(--primary-color);
+    .bg-gradient-success {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     }
 
-    /* Responsive */
-    @@media (max-width: 768px) {
-        .hero-title { font-size: 2.5rem; }
-        .metric-number { font-size: 2rem; }
-        .chart-container { height: 250px; }
+    .bg-gradient-warning {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    }
+
+    .bg-gradient-danger {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    }
+
+    .product-card {
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>
 
-<body>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container hero-content">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🏢💻</div>
-                    <h1 class="hero-title">SUNTECH</h1>
-                    <h2 class="h3 mb-3" style="color: rgba(255,255,255,0.9);">Warehouse Management System</h2>
-                    <p class="hero-subtitle">Advanced Technology Solutions for Computer Accessories, Components, Laptops & Mobile Accessories</p>
-                    
-                    <div class="d-flex flex-wrap">
-                        <a href="#" class="btn-hero">
-                            <i class="fas fa-cubes me-2"></i>Inventory Management
-                        </a>
-                        <a href="#" class="btn-hero">
-                            <i class="fas fa-truck me-2"></i>Product Inflow
-                        </a>
-                        <a href="#" class="btn-hero">
-                            <i class="fas fa-warehouse me-2"></i>Storage Management
-                        </a>
-                        <a href="#" class="btn-hero">
-                            <i class="fas fa-shipping-fast me-2"></i>Dispatch
-                        </a>
-                    </div>
+<div class="container-fluid py-4 fade-in-up">
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2 class="text-dark fw-bold mb-0">
+                <i class="fas fa-warehouse text-primary me-3"></i>SUNTECH Dashboard
+            </h2>
+            <p class="text-muted">Warehouse Management System - Computer Accessories & Components</p>
+        </div>
+      
+    </div>
+
+    <!-- System Status Alert -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <div class="flex-grow-1">
+                    <strong>System Status:</strong> All systems are operational. Database connected successfully.
                 </div>
-                
-                <div class="col-lg-4">
-                    <div class="card-modern p-4">
-                        <h5 class="section-title text-dark">
-                            <i class="fas fa-server"></i>System Status
-                        </h5>
-                        <div class="status-badge status-online">
-                            <span class="status-dot"></span>
-                            All Systems Online
+                <span class="badge bg-success">Online</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPI Metrics Cards -->
+    <div class="row mb-4" id="metricsSection">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-primary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0 opacity-75">Total Products</h6>
+                            <h3 class="mb-0 fw-bold" id="counter1">0</h3>
                         </div>
-                        <div class="status-badge status-online">
-                            <span class="status-dot"></span>
-                            Database Connected
-                        </div>
-                        <div class="status-badge status-warning">
-                            <span class="status-dot"></span>
-                            Maintenance: 2:00 AM
-                        </div>
+                        <i class="fas fa-boxes fa-2x opacity-50"></i>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Main Dashboard -->
-    <div class="container" style="margin-top: -80px; position: relative; z-index: 5;">
-        
-        <!-- KPI Metrics -->
-        <div class="row mb-5" id="metricsSection">
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card">
-                    <div class="metric-number" id="counter1">0</div>
-                    <div class="metric-label">Total Products</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card">
-                    <div class="metric-number" id="counter2">0</div>
-                    <div class="metric-label">Pending Inflows</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card">
-                    <div class="metric-number" id="counter3">0</div>
-                    <div class="metric-label">Ready to Ship</div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card">
-                    <div class="metric-number" id="counter4">0</div>
-                    <div class="metric-label">Waste Items</div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-success text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0 opacity-75">Pending Inflows</h6>
+                            <h3 class="mb-0 fw-bold" id="counter2">0</h3>
+                        </div>
+                        <i class="fas fa-truck-loading fa-2x opacity-50"></i>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Core Features -->
-        <div class="row">
-            <div class="col-12">
-                <h3 class="section-title">
-                    <i class="fas fa-cogs"></i>Core Subsystems
-                </h3>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-warning text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0 opacity-75">Ready to Ship</h6>
+                            <h3 class="mb-0 fw-bold" id="counter3">0</h3>
+                        </div>
+                        <i class="fas fa-shipping-fast fa-2x opacity-50"></i>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h5>Inventory Management</h5>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-gradient-danger text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0 opacity-75">Waste Items</h6>
+                            <h3 class="mb-0 fw-bold" id="counter4">0</h3>
+                        </div>
+                        <i class="fas fa-recycle fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Features Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h3 class="text-dark fw-bold mb-3">
+                <i class="fas fa-cogs text-primary me-2"></i>Core Subsystems
+            </h3>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card-body">
+                    <div class="feature-icon text-primary">📦</div>
+                    <h5 class="card-title text-dark fw-bold">Inventory Management</h5>
                     <p class="text-muted">Real-time tracking of computer accessories, components, laptops, and mobile accessories with automated stock alerts.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <span class="badge bg-success">Active</span>
@@ -373,11 +274,13 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card">
-                    <div class="feature-icon">🚛</div>
-                    <h5>Product Inflow Management</h5>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card-body">
+                    <div class="feature-icon text-success">🚛</div>
+                    <h5 class="card-title text-dark fw-bold">Product Inflow Management</h5>
                     <p class="text-muted">Automated recording and validation of products received from suppliers with barcode scanning support.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <span class="badge bg-primary">Processing</span>
@@ -385,11 +288,13 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card">
-                    <div class="feature-icon">🏗️</div>
-                    <h5>Storage Management</h5>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card-body">
+                    <div class="feature-icon text-info">🏗️</div>
+                    <h5 class="card-title text-dark fw-bold">Storage Management</h5>
                     <p class="text-muted">Intelligent storage location tracking and optimization for efficient warehouse space utilization.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <span class="badge bg-info">Optimized</span>
@@ -397,11 +302,13 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card">
-                    <div class="feature-icon">📤</div>
-                    <h5>Dispatch Management</h5>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card-body">
+                    <div class="feature-icon text-warning">📤</div>
+                    <h5 class="card-title text-dark fw-bold">Dispatch Management</h5>
                     <p class="text-muted">Streamlined dispatch process with real-time tracking and automated customer notifications.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <span class="badge bg-warning">Active</span>
@@ -409,11 +316,13 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h5>User Management</h5>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card-body">
+                    <div class="feature-icon text-secondary">👥</div>
+                    <h5 class="card-title text-dark fw-bold">User Management</h5>
                     <p class="text-muted">Role-based access control with Admin, Manager, and Staff permissions for secure operations.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <span class="badge bg-secondary">Secured</span>
@@ -421,12 +330,14 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card">
-                    <div class="feature-icon">♻️</div>
-                    <h5>Waste Tracking</h5>
-                    <p class="text-muted">Environmental sustainability through tracking and proper handling of damaged, returned, or expired items.</p>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card-body">
+                    <div class="feature-icon text-success">♻️</div>
+                    <h5 class="card-title text-dark fw-bold">Waste Tracking</h5>
+                    <p class="text-muted">Environmental sustainability through tracking and proper handling of damaged or expired items.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <span class="badge bg-success">Eco-Mode</span>
                         <small class="text-muted">12 items</small>
@@ -434,89 +345,53 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Charts and Analytics -->
-        <div class="row mt-5" id="chartsSection">
-            <div class="col-lg-8">
-                <div class="card-modern">
-                    <div class="card-body">
-                        <h5 class="section-title">
-                            <i class="fas fa-chart-line"></i>Weekly Performance
-                        </h5>
-                        <div class="chart-container">
-                            <canvas id="performanceChart"></canvas>
-                        </div>
-                    </div>
+    <!-- Charts and Analytics Row -->
+    <div class="row" id="chartsSection">
+        <div class="col-lg-8 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-light border-0">
+                    <h5 class="mb-0 text-dark fw-bold">
+                        <i class="fas fa-chart-line text-primary me-2"></i>Weekly Performance
+                    </h5>
                 </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card-modern">
-                    <div class="card-body">
-                        <h5 class="section-title">
-                            <i class="fas fa-clock"></i>Recent Activity
-                        </h5>
-                        <div style="max-height: 300px; overflow-y: auto;">
-                            <div class="activity-item">
-                                <div class="activity-time">2 min ago</div>
-                                <div class="mt-1"><strong>Inflow:</strong> 50x Gaming Keyboards received</div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-time">8 min ago</div>
-                                <div class="mt-1"><strong>Dispatch:</strong> Order #ST-1847 shipped</div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-time">15 min ago</div>
-                                <div class="mt-1"><strong>Alert:</strong> iPhone cases low stock</div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-time">22 min ago</div>
-                                <div class="mt-1"><strong>Waste:</strong> 3 damaged graphics cards logged</div>
-                            </div>
-                        </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Product Categories -->
-        <div class="row mt-4">
-            <div class="col-lg-6">
-                <div class="card-modern">
-                    <div class="card-body">
-                        <h5 class="section-title">
-                            <i class="fas fa-layer-group"></i>Product Distribution
-                        </h5>
-                        <div class="chart-container">
-                            <canvas id="categoryChart"></canvas>
-                        </div>
-                    </div>
+        
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-light border-0">
+                    <h5 class="mb-0 text-dark fw-bold">
+                        <i class="fas fa-clock text-primary me-2"></i>Recent Activity
+                    </h5>
                 </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="card-modern">
-                    <div class="card-body">
-                        <h5 class="section-title">
-                            <i class="fas fa-tachometer-alt"></i>Key Metrics
-                        </h5>
-                        <div class="row text-center">
-                            <div class="col-6 mb-3">
-                                <h3 class="text-primary" id="efficiency">0%</h3>
-                                <p class="text-muted mb-0">Efficiency</p>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <h3 class="text-success" id="accuracy">0%</h3>
-                                <p class="text-muted mb-0">Accuracy</p>
-                            </div>
-                            <div class="col-6">
-                                <h3 class="text-warning" id="uptime">0%</h3>
-                                <p class="text-muted mb-0">Uptime</p>
-                            </div>
-                            <div class="col-6">
-                                <h3 class="text-info" id="satisfaction">0%</h3>
-                                <p class="text-muted mb-0">Satisfaction</p>
-                            </div>
+                <div class="card-body">
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <div class="activity-item">
+                            <div class="activity-time">2 min ago</div>
+                            <div class="mt-1"><strong>Inflow:</strong> 50x Gaming Keyboards received</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-time">8 min ago</div>
+                            <div class="mt-1"><strong>Dispatch:</strong> Order #ST-1847 shipped</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-time">15 min ago</div>
+                            <div class="mt-1"><strong>Alert:</strong> iPhone cases low stock</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-time">22 min ago</div>
+                            <div class="mt-1"><strong>Waste:</strong> 3 damaged graphics cards logged</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-time">45 min ago</div>
+                            <div class="mt-1"><strong>Update:</strong> Storage location B-12 reorganized</div>
                         </div>
                     </div>
                 </div>
@@ -524,185 +399,201 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Product Distribution and Metrics Row -->
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-light border-0">
+                    <h5 class="mb-0 text-dark fw-bold">
+                        <i class="fas fa-layer-group text-primary me-2"></i>Product Distribution
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-light border-0">
+                    <h5 class="mb-0 text-dark fw-bold">
+                        <i class="fas fa-tachometer-alt text-primary me-2"></i>Key Metrics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6 mb-3">
+                            <h3 class="text-primary" id="efficiency">0%</h3>
+                            <p class="text-muted mb-0">Efficiency</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h3 class="text-success" id="accuracy">0%</h3>
+                            <p class="text-muted mb-0">Accuracy</p>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-warning" id="uptime">0%</h3>
+                            <p class="text-muted mb-0">Uptime</p>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-info" id="satisfaction">0%</h3>
+                            <p class="text-muted mb-0">Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Custom JavaScript -->
-    <script>
-        // Intersection Observer for scroll-triggered animations
-        const observerOptions = {
-            threshold: 0.3,
-            rootMargin: '0px 0px -100px 0px'
-        };
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        let countersAnimated = false;
-        let chartsInitialized = false;
+<!-- Custom JavaScript -->
+<script>
+    // Intersection Observer for scroll-triggered animations
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    };
 
-        // Counter animation function
-        function animateCounter(elementId, targetValue, duration = 2000, suffix = '') {
-            const element = document.getElementById(elementId);
-            const startValue = 0;
-            const increment = targetValue / (duration / 16);
-            let currentValue = startValue;
-            
-            const timer = setInterval(() => {
-                currentValue += increment;
-                if (currentValue >= targetValue) {
-                    currentValue = targetValue;
-                    clearInterval(timer);
+    let countersAnimated = false;
+    let chartsInitialized = false;
+
+    // Counter animation function
+    function animateCounter(elementId, targetValue, duration = 2000, suffix = '') {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+        
+        const startValue = 0;
+        const increment = targetValue / (duration / 16);
+        let currentValue = startValue;
+        
+        const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= targetValue) {
+                currentValue = targetValue;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(currentValue).toLocaleString() + suffix;
+        }, 16);
+    }
+
+    // Initialize charts function
+    function initCharts() {
+        // Performance Chart
+        const performanceCtx = document.getElementById('performanceChart');
+        if (performanceCtx) {
+            new Chart(performanceCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Inflow',
+                        data: [65, 78, 82, 94, 87, 91, 76],
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Dispatch',
+                        data: [45, 67, 73, 89, 92, 85, 88],
+                        borderColor: '#ffc107',
+                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
-                element.textContent = Math.floor(currentValue).toLocaleString() + suffix;
-            }, 16);
+            });
         }
 
-        // Initialize charts function
-        function initCharts() {
-            // Performance Chart
-            const performanceCtx = document.getElementById('performanceChart');
-            if (performanceCtx) {
-                new Chart(performanceCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        datasets: [{
-                            label: 'Inflow',
-                            data: [65, 78, 82, 94, 87, 91, 76],
-                            borderColor: '#2563eb',
-                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#2563eb',
-                            pointBorderColor: '#ffffff',
-                            pointBorderWidth: 2,
-                            pointRadius: 6
-                        }, {
-                            label: 'Dispatch',
-                            data: [45, 67, 73, 89, 92, 85, 88],
-                            borderColor: '#f59e0b',
-                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#f59e0b',
-                            pointBorderColor: '#ffffff',
-                            pointBorderWidth: 2,
-                            pointRadius: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                                labels: {
-                                    usePointStyle: true,
-                                    padding: 20
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(0,0,0,0.1)'
-                                },
-                                ticks: {
-                                    color: '#64748b'
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    color: 'rgba(0,0,0,0.1)'
-                                },
-                                ticks: {
-                                    color: '#64748b'
-                                }
-                            }
+        // Category Chart
+        const categoryCtx = document.getElementById('categoryChart');
+        if (categoryCtx) {
+            new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Laptops & Accessories', 'Mobile Accessories', 'Computer Components', 'Peripherals'],
+                    datasets: [{
+                        data: [1245, 892, 743, 367],
+                        backgroundColor: [
+                            '#0d6efd',
+                            '#ffc107',
+                            '#198754',
+                            '#dc3545'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
                         }
                     }
-                });
-            }
-
-            // Category Chart
-            const categoryCtx = document.getElementById('categoryChart');
-            if (categoryCtx) {
-                new Chart(categoryCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Laptops & Accessories', 'Mobile Accessories', 'Computer Components', 'Peripherals'],
-                        datasets: [{
-                            data: [1245, 892, 743, 367],
-                            backgroundColor: [
-                                '#2563eb',
-                                '#f59e0b',
-                                '#10b981',
-                                '#ef4444'
-                            ],
-                            borderWidth: 3,
-                            borderColor: '#ffffff',
-                            hoverOffset: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    usePointStyle: true,
-                                    padding: 15
-                                }
-                            }
-                        }
-                    }
-                });
-            }
+                }
+            });
         }
+    }
 
-        // Set up observers
-        document.addEventListener('DOMContentLoaded', function() {
-            // Observer for metrics section
-            const metricsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !countersAnimated) {
-                        countersAnimated = true;
-                        // Start counter animations
-                        setTimeout(() => {
-                            animateCounter('counter1', 3247);
-                            animateCounter('counter2', 89);
-                            animateCounter('counter3', 156);
-                            animateCounter('counter4', 12);
-                            animateCounter('efficiency', 94.7, 2000, '%');
-                            animateCounter('accuracy', 99.2, 2200, '%');
-                            animateCounter('uptime', 99.9, 2500, '%');
-                            animateCounter('satisfaction', 97.3, 1800, '%');
-                        }, 200);
-                        metricsObserver.disconnect();
-                    }
-                });
-            }, observerOptions);
+    // Set up observers
+    document.addEventListener('DOMContentLoaded', function() {
+        // Observer for metrics section
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    // Start counter animations
+                    setTimeout(() => {
+                        animateCounter('counter1', 3247);
+                        animateCounter('counter2', 89);
+                        animateCounter('counter3', 156);
+                        animateCounter('counter4', 12);
+                        animateCounter('efficiency', 94.7, 2000, '%');
+                        animateCounter('accuracy', 99.2, 2200, '%');
+                        animateCounter('uptime', 99.9, 2500, '%');
+                        animateCounter('satisfaction', 97.3, 1800, '%');
+                    }, 200);
+                    metricsObserver.disconnect();
+                }
+            });
+        }, observerOptions);
 
-            // Observer for charts section
-            const chartsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !chartsInitialized) {
-                        chartsInitialized = true;
-                        setTimeout(() => {
-                            initCharts();
-                        }, 100);
-                        chartsObserver.disconnect();
-                    }
-                });
-            }, observerOptions);
+        // Observer for charts section
+        const chartsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !chartsInitialized) {
+                    chartsInitialized = true;
+                    setTimeout(() => {
+                        initCharts();
+                    }, 100);
+                    chartsObserver.disconnect();
+                }
+            });
+        }, observerOptions);
 
-            // Start observing
-            const metricsSection = document.getElementById('metricsSection');
-            const chartsSection = document.getElementById('chartsSection');
-            
-            if (metricsSection) metricsObserver.observe(metricsSection);
-            if (chartsSection) chartsObserver.observe(chartsSection);
-        });
-    </script>
-</body>
-</html>
+        // Start observing
+        const metricsSection = document.getElementById('metricsSection');
+        const chartsSection = document.getElementById('chartsSection');
+        
+        if (metricsSection) metricsObserver.observe(metricsSection);
+        if (chartsSection) chartsObserver.observe(chartsSection);
+    });
+</script>
