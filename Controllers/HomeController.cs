@@ -22,11 +22,12 @@ namespace SunTech.Controllers
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Product()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Redirect to Products controller Index action
+            return RedirectToAction("Index", "Products");
         }
+
+
     }
 }

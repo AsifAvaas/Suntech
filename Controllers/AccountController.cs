@@ -45,17 +45,17 @@ namespace SunTech.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == model.Email);
+                .FirstOrDefaultAsync(u => u.Email == model.Email);
 
                 if (user != null && VerifyPassword(model.Password, user.PasswordHash))
                 {
                     var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                        new Claim(ClaimTypes.Name, user.Name),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Role, user.Role)
-                    };
+{
+new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+new Claim(ClaimTypes.Name, user.Name),
+new Claim(ClaimTypes.Email, user.Email),
+new Claim(ClaimTypes.Role, user.Role)
+};
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var authProperties = new AuthenticationProperties
@@ -65,7 +65,7 @@ namespace SunTech.Controllers
                     };
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(claimsIdentity), authProperties);
+                    new ClaimsPrincipal(claimsIdentity), authProperties);
 
                     _logger.LogInformation($"User {user.Email} logged in successfully");
 
@@ -102,7 +102,7 @@ namespace SunTech.Controllers
             {
                 // Check if email already exists
                 var existingUser = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == model.Email);
+                .FirstOrDefaultAsync(u => u.Email == model.Email);
 
                 if (existingUser != null)
                 {
@@ -128,16 +128,16 @@ namespace SunTech.Controllers
 
                     // Auto login after registration
                     var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                        new Claim(ClaimTypes.Name, user.Name),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Role, user.Role)
-                    };
+{
+new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+new Claim(ClaimTypes.Name, user.Name),
+new Claim(ClaimTypes.Email, user.Email),
+new Claim(ClaimTypes.Role, user.Role)
+};
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(claimsIdentity));
+                    new ClaimsPrincipal(claimsIdentity));
 
                     TempData["SuccessMessage"] = "Account created successfully! Welcome to SunTech.";
                     return RedirectToAction("Index", "Home");

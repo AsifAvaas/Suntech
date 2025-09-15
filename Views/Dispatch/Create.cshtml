@@ -1,0 +1,128 @@
+﻿@model SunTech.Models.DatabaseModel.Dispatch
+@{
+    ViewData["Title"] = "Remove Product from Stock";
+    Layout = "_Layout";
+}
+
+<div class="container py-5 fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-danger text-white text-center py-4">
+                    <h2 class="mb-0 fw-bold">
+                        <i class="fas fa-truck me-3"></i>Dispatch Product
+                    </h2>
+                    <p class="mb-0 opacity-75">Remove product from inventory</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <div class="alert alert-warning mb-4">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-box fa-2x me-3"></i>
+                            <div>
+                                <h5 class="mb-1">Product Information</h5>
+                                <p class="mb-0">Selected ProductId: @ViewBag.ProductId</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form asp-action="Create" method="post" novalidate>
+    @Html.AntiForgeryToken()
+    
+    <!-- ADD THIS LINE RIGHT HERE -->
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    
+    <input type="hidden" name="productId" value="@ViewBag.ProductId" />
+
+
+                        <input type="hidden" name="productId" value="@ViewBag.ProductId" />
+
+                        <div class="mb-4">
+                            <label asp-for="Quantity" class="form-label fw-semibold">
+                                <i class="fas fa-minus-circle me-2 text-danger"></i>Quantity to Remove
+                            </label>
+                            <input asp-for="Quantity" class="form-control form-control-lg"
+                                   placeholder="Enter quantity" type="number" min="1" />
+                            <span asp-validation-for="Quantity" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="CustomerId" class="form-label fw-semibold">
+                                <i class="fas fa-user me-2 text-danger"></i>Customer Information
+                            </label>
+                            <input asp-for="CustomerId" class="form-control form-control-lg"
+                                   placeholder="Enter customer ID or name (optional)" />
+                            <span asp-validation-for="CustomerId" class="text-danger small"></span>
+                            <div class="form-text">Leave blank for waste disposal</div>
+                        </div>
+
+ <!-- Waste toggle - FIXED ORDER -->
+<div class="form-check form-switch mb-4">
+    <!-- checkbox comes FIRST -->
+    <input class="form-check-input" 
+           type="checkbox" 
+           id="isWaste" 
+           name="isWaste" 
+           value="true" />
+    
+    <!-- hidden comes SECOND to provide false when unchecked -->
+    <input type="hidden" name="isWaste" value="false" />
+
+    <label class="form-check-label fw-semibold" for="isWaste">
+        <i class="fas fa-trash-alt me-2 text-danger"></i>Mark as Waste
+    </label>
+</div>
+
+
+
+                        <!-- Waste reason (disabled by default ✅) -->
+                        <div class="mb-4" id="wasteReasonContainer">
+                            <label class="form-label fw-semibold" for="wasteReason">
+                                <i class="fas fa-comment-dots me-2 text-danger"></i>Waste Reason
+                            </label>
+                            <input class="form-control form-control-lg"
+                                   id="wasteReason"
+                                   name="wasteReason"
+                                   placeholder="Enter reason"
+                                   disabled /> <!-- ✅ starts disabled -->
+                            <span class="text-danger small">@Html.ValidationMessage("WasteReason")</span>
+                        </div>
+
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Warning:</strong> This action will permanently reduce the product's stock quantity.
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-check me-2"></i>Dispatch Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @@await Html.RenderPartialAsync("_ValidationScriptsPartial")
+
+    <!-- ✅ Toggle Waste Reason input -->
+    <script>
+        document.getElementById("isWaste").addEventListener("change", function () {
+            const wasteReason = document.getElementById("wasteReason");
+            if (this.checked) {
+                wasteReason.disabled = false;
+                wasteReason.required = true; // ✅ force user to enter reason
+            } else {
+                wasteReason.disabled = true;
+                wasteReason.required = false;
+                wasteReason.value = ""; // clear value when unchecked
+            }
+        });
+    </script>
+}

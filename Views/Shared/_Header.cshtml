@@ -1,9 +1,9 @@
-﻿
-<header>
-    <nav class="navbar navbar-expand-lg navbar-custom">
+﻿<header>
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                <i class="fas fa-sun me-2"></i>SunTech
+            <a class="navbar-brand fw-bold" href="@Url.Action("Index", "Home")">
+                <i class="fas fa-sun me-2 text-warning"></i>
+                <span class="text-primary">Sun</span><span class="text-dark">Tech</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,38 +13,38 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Home")">
-                            <i class="fas fa-home me-1"></i>Dashboard
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Home")">
+                            <i class="fas fa-home me-2"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Product")">
-                            <i class="fas fa-box me-1"></i>Products
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Products")">
+                            <i class="fas fa-box me-2"></i>Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Inflow")">
-                            <i class="fas fa-arrow-down me-1"></i>Inflows
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Inflows")">
+                            <i class="fas fa-arrow-down me-2"></i>Inflows
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Storage")">
-                            <i class="fas fa-warehouse me-1"></i>Storage
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Storage")">
+                            <i class="fas fa-warehouse me-2"></i>Storage
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Dispatch")">
-                            <i class="fas fa-truck me-1"></i>Dispatch
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Dispatch")">
+                            <i class="fas fa-truck me-2"></i>Dispatch
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Waste")">
-                            <i class="fas fa-trash me-1"></i>Waste
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Waste")">
+                            <i class="fas fa-trash me-2"></i>Waste
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Report")">
-                            <i class="fas fa-chart-bar me-1"></i>Reports
+                        <a class="nav-link fw-semibold" href="@Url.Action("Index", "Report")">
+                            <i class="fas fa-chart-bar me-2"></i>Reports
                         </a>
                     </li>
                 </ul>
@@ -53,25 +53,25 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-circle me-1"></i>@User.Identity.Name
+                            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle me-2"></i>@User.Identity.Name
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
                                 <li>
                                     <a class="dropdown-item" href="@Url.Action("Profile", "Account")">
-                                        <i class="fas fa-user me-2"></i>Profile
+                                        <i class="fas fa-user me-3"></i>Profile
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="@Url.Action("Settings", "Account")">
-                                        <i class="fas fa-cog me-2"></i>Settings
+                                        <i class="fas fa-cog me-3"></i>Settings
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form asp-action="Logout" asp-controller="Account" method="post" class="d-inline">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fas fa-sign-out-alt me-3"></i>Logout
                                         </button>
                                     </form>
                                 </li>
@@ -81,13 +81,13 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Login", "Account")">
-                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            <a class="nav-link fw-semibold" href="@Url.Action("Login", "Account")">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-custom ms-2" href="@Url.Action("Register", "Account")">
-                                <i class="fas fa-user-plus me-1"></i>Sign Up
+                            <a class="btn btn-custom ms-3 px-4" href="@Url.Action("Register", "Account")">
+                                <i class="fas fa-user-plus me-2"></i>Sign Up
                             </a>
                         </li>
                     }

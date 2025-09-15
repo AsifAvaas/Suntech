@@ -1,0 +1,77 @@
+@model SunTech.Models.DatabaseModel.Inflow
+@{
+    ViewData["Title"] = "Add Inflow";
+    Layout = "_Layout";
+}
+
+<div class="container py-5 fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-success text-white text-center py-4">
+                    <h2 class="mb-0 fw-bold">
+                        <i class="fas fa-arrow-down me-3"></i>Add Stock Inflow
+                    </h2>
+                    <p class="mb-0 opacity-75">Increase product inventory</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <form asp-action="Create" method="post" novalidate>
+                        <div class="mb-4">
+                            <label asp-for="ProductId" class="form-label fw-semibold">
+                                <i class="fas fa-box me-2 text-success"></i>Select Product
+                            </label>
+                            <select asp-for="ProductId" class="form-select form-select-lg">
+                                <option value="">Choose a product...</option>
+                                @foreach (var product in ViewBag.Products as List<SunTech.Models.DatabaseModel.Product>)
+                                {
+                                    <option value="@product.ProductId">@product.Name (@product.Category)</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ProductId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Quantity" class="form-label fw-semibold">
+                                <i class="fas fa-plus-circle me-2 text-success"></i>Quantity to Add
+                            </label>
+                            <input asp-for="Quantity" class="form-control form-control-lg"
+                                   placeholder="Enter quantity" type="number" min="1" />
+                            <span asp-validation-for="Quantity" class="text-danger small"></span>
+                            <div class="form-text">Enter the number of units received</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="SupplierId" class="form-label fw-semibold">
+                                <i class="fas fa-truck me-2 text-success"></i>Supplier Information
+                            </label>
+                            <input asp-for="SupplierId" class="form-control form-control-lg"
+                                   placeholder="Enter supplier name or ID" />
+                            <span asp-validation-for="SupplierId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Note:</strong> This will automatically update the product's stock quantity.
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-check me-2"></i>Add to Stock
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
