@@ -188,6 +188,85 @@ new Claim(ClaimTypes.Role, user.Role)
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile(ProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var user = await _context.Users.FindAsync(userId);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                // Check if email is being changed and if it already exists
+                if (user.Email != model.Email)
+                {
+                    var existingUser = await _context.Users
+                        .FirstOrDefaultAsync(u => u.Email == model.Email && u.UserId != userId);
+
+                    if (existingUser != null)
+                    {
+                        ModelState.AddModelError("Email", "An account with this email already exists.");
+                        return Json(new { success = false, errors = GetModelStateErrors() });
+                    }
+                }
+
+                // Update user information
+                user.Name = model.Name;
+                user.Email = model.Email;
+                // Note: Role typically shouldn't be editable by the user themselves
+                // user.Role = model.Role; // Uncomment if you want users to edit their own roles
+
+                try
+                {
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync();
+
+                    // Update the claims if email or name changed
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity));
+
+                    _logger.LogInformation($"User {user.Email} updated their profile");
+
+                    return Json(new { success = true, message = "Profile updated successfully!" });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error updating user profile");
+                    return Json(new { success = false, message = "An error occurred while updating your profile. Please try again." });
+                }
+            }
+
+            return Json(new { success = false, errors = GetModelStateErrors() });
+        }
+
+        // Helper method to get model state errors
+        private Dictionary<string, string[]> GetModelStateErrors()
+        {
+            return ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+        }
+
         [HttpGet]
         public IActionResult AccessDenied()
         {
