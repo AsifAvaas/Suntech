@@ -84,22 +84,22 @@
                                 <span asp-validation-for="Email" class="text-danger small"></span>
                             </div>
 
-                            <!-- Role Selection -->
-                            <div class="form-floating mb-3">
-                                <select asp-for="Role" class="form-select form-control-auth">
-                                    <option value="">Select your role</option>
-                                    <option value="Admin">Administrator</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Supervisor">Supervisor</option>
-                                    <option value="Operator">Operator</option>
-                                    <option value="Analyst">Analyst</option>
-                                </select>
-                                <label asp-for="Role" class="form-label-auth">
-                                    <i class="fas fa-briefcase me-2"></i>Role
-                                </label>
-                                <span asp-validation-for="Role" class="text-danger small"></span>
-                            </div>
-
+                            @* <!-- Role Selection --> *@
+                            @* <div class="form-floating mb-3"> *@
+                            @*     <select asp-for="Role" class="form-select form-control-auth"> *@
+                            @*         <option value="">Select your role</option> *@
+                            @*         <option value="Admin">Administrator</option> *@
+                            @*         <option value="Manager">Manager</option> *@
+                            @*         <option value="Supervisor">Supervisor</option> *@
+                            @*         <option value="Operator">Operator</option> *@
+                            @*         <option value="Analyst">Analyst</option> *@
+                            @*     </select> *@
+                            @*     <label asp-for="Role" class="form-label-auth"> *@
+                            @*         <i class="fas fa-briefcase me-2"></i>Role *@
+                            @*     </label> *@
+                            @*     <span asp-validation-for="Role" class="text-danger small"></span> *@
+                            @* </div> *@
+                            <input asp-for="Role" type="hidden" value="User" />
                             <!-- Password Row -->
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6">
