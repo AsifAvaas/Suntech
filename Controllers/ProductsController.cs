@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SunTech.Data;
-using SunTech.Models; // <-- Correct namespace
+using SunTech.Models;
 using static SunTech.Models.DatabaseModel;
 
 namespace SunTech.Controllers
@@ -22,19 +22,24 @@ namespace SunTech.Controllers
         {
             var productsQuery = _context.Products.AsQueryable();
 
-            // Filter by search term
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                productsQuery = productsQuery.Where(p => p.Name.Contains(search));
+                string lowerSearch = search.ToLower();
+                productsQuery = productsQuery.Where(p =>
+                    p.Name.ToLower().Contains(lowerSearch) ||
+                    (p.Category != null && p.Category.ToLower().Contains(lowerSearch)) ||
+                    (p.Supplier != null && p.Supplier.ToLower().Contains(lowerSearch)));
             }
 
-            // Order by newest first
             var products = await productsQuery
-                .OrderByDescending(p => p.ProductId) // assuming ProductId increments
+                .OrderByDescending(p => p.ProductId)
                 .ToListAsync();
+
+            ViewData["CurrentFilter"] = search;
 
             return View(products);
         }
+
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -48,12 +53,11 @@ namespace SunTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Add the new product to the database
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index)); // Redirect back to the product list after creation
+                return RedirectToAction(nameof(Index));
             }
-            return View(product); // Return the form with validation errors if the model state is invalid
+            return View(product);
         }
 
         // Product details
@@ -61,10 +65,8 @@ namespace SunTech.Controllers
         {
             var product = await _context.Products
                 .FirstOrDefaultAsync(p => p.ProductId == id);
-
             if (product == null)
                 return NotFound();
-
             return View(product);
         }
     }
