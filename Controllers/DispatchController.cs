@@ -16,10 +16,12 @@ namespace SunTech.Controllers
         }
 
         // GET: Dispatch/Index
+
         public async Task<IActionResult> Index()
         {
             var dispatches = await _context.Dispatches
                 .Include(d => d.Product)
+                .OrderByDescending(d => d.DateDispatched)  // Sort by most recent first
                 .ToListAsync();
             return View(dispatches);
         }

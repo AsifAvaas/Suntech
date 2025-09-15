@@ -59,14 +59,10 @@
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
                                 <li>
                                     <a class="dropdown-item" href="@Url.Action("Profile", "Account")">
-                                        <i class="fas fa-user me-3"></i>Profile
+                                        <i class="fas fa-user me-3"></i>Profile1
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="@Url.Action("Settings", "Account")">
-                                        <i class="fas fa-cog me-3"></i>Settings
-                                    </a>
-                                </li>
+
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form asp-action="Logout" asp-controller="Account" method="post" class="d-inline">
